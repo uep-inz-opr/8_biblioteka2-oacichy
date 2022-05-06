@@ -50,6 +50,16 @@ class Wypozyczone():
             if nazwisko == temp.nazwisko and tytul == temp.tytul:
                 return True
         return False
+    def czymoznawypozyczyc(nazwisko, wypozyczenia):
+        licznik = 0
+        for i in range(len(wypozyczenia)):
+            temp = wypozyczenia[i]
+            if nazwisko == temp.nazwisko:
+                licznik = licznik + 1
+        if licznik > 2:
+            return False
+        else: 
+            return True
     def oddaj(nazwisko, tytul, wypozyczenia):
         for i in range(len(wypozyczenia)):
             temp = wypozyczenia[i]
@@ -81,10 +91,18 @@ for i in range(0, int(n)):
         czyjuzjest = czyjestwliscie(czytelnicy, temp[1])
         if czyjuzjest is False:
             Czytelnik.dodaj((Czytelnik(temp[1])), czytelnicy)
-        wypozycz = Egzemplarz.wypozycz(temp[2], egzemplarze)
-        wyniki.append(wypozycz)
-        if wypozycz == True:
-            Wypozyczone.dodaj(Wypozyczone(temp[1], temp[2]), wypozyczenia)
+        czymoznawypozyczyc = Wypozyczone.czymoznawypozyczyc(temp[1], wypozyczenia)
+        if czymoznawypozyczyc is True:
+            czywypozyczone = Wypozyczone.czywypozyczone(temp[1], temp[2], wypozyczenia)
+            if czywypozyczone == False:
+                wypozycz = Egzemplarz.wypozycz(temp[2], egzemplarze)
+                wyniki.append(wypozycz)
+                if wypozycz == True:
+                    Wypozyczone.dodaj(Wypozyczone(temp[1], temp[2]), wypozyczenia)
+            else:
+                wyniki.append(False)
+        else:
+            wyniki.append(False)
     if temp[0] == "oddaj":
         czywypozyczone = Wypozyczone.czywypozyczone(temp[1], temp[2], wypozyczenia)
         if czywypozyczone == False:
