@@ -28,15 +28,8 @@ class Egzemplarz():
 class Czytelnik():
     def __init__(self, nazwisko):
         self.nazwisko = nazwisko
-
     def dodaj(self, czytelnicy):
         czytelnicy.append(Czytelnik(self.nazwisko))
-    
-    def wypozycz (Egzemplarz):
-        return True
-    
-    def oddaj (tytul):
-        return True
 
 class Wypozyczone():
     def __init__(self, nazwisko, tytul):
