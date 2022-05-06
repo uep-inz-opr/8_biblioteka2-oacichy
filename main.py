@@ -74,26 +74,25 @@ wypozyczenia = []
 n = input()
 for i in range(0, int(n)):
     temp = eval(input())
-    match temp[0]:
-        case "dodaj":
-            dodaj = Egzemplarz.dodaj((Egzemplarz(temp[1], temp[2], temp[3], False)), egzemplarze)
-            wyniki.append(dodaj)
-        case "wypozycz":
-            czyjuzjest = czyjestwliscie(czytelnicy, temp[1])
-            if czyjuzjest is False:
-                Czytelnik.dodaj((Czytelnik(temp[1])), czytelnicy)
-            wypozycz = Egzemplarz.wypozycz(temp[2], egzemplarze)
-            wyniki.append(wypozycz)
-            if wypozycz == True:
-                Wypozyczone.dodaj(Wypozyczone(temp[1], temp[2]), wypozyczenia)
-        case "oddaj":
-            czywypozyczone = Wypozyczone.czywypozyczone(temp[1], temp[2], wypozyczenia)
-            if czywypozyczone == False:
-                wyniki.append(czywypozyczone)
-            else:
-                 oddaj = Wypozyczone.oddaj(temp[1], temp[2], wypozyczenia)
-                 Egzemplarz.oddaj(temp[2], egzemplarze)
-                 wyniki.append(oddaj)
+    if temp[0] == "dodaj":
+        dodaj = Egzemplarz.dodaj((Egzemplarz(temp[1], temp[2], temp[3], False)), egzemplarze)
+        wyniki.append(dodaj)
+    if temp[0] == "wypozycz":
+        czyjuzjest = czyjestwliscie(czytelnicy, temp[1])
+        if czyjuzjest is False:
+            Czytelnik.dodaj((Czytelnik(temp[1])), czytelnicy)
+        wypozycz = Egzemplarz.wypozycz(temp[2], egzemplarze)
+        wyniki.append(wypozycz)
+        if wypozycz == True:
+            Wypozyczone.dodaj(Wypozyczone(temp[1], temp[2]), wypozyczenia)
+    if temp[0] == "oddaj":
+        czywypozyczone = Wypozyczone.czywypozyczone(temp[1], temp[2], wypozyczenia)
+        if czywypozyczone == False:
+            wyniki.append(czywypozyczone)
+        else:
+            oddaj = Wypozyczone.oddaj(temp[1], temp[2], wypozyczenia)
+            Egzemplarz.oddaj(temp[2], egzemplarze)
+            wyniki.append(oddaj)
 
 
 for i in range(len(wyniki)):
